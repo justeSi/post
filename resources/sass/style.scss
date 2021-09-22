@@ -1,0 +1,54 @@
+.pagination > li > a,
+
+.pagination > li > span {
+   color: rgb(3, 3, 3); // use your own color here
+}
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+    background-color: #396985;
+    border-color: rgb(2, 2, 2);
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: rgb(255, 255, 255);
+    background-color: #396985; //your color
+    border-color: #396985; //your color
+
+
+}
+
+
+.card-header {
+    background: linear-gradient(to bottom, #7698c2 25%, #164b7c 100%);
+    color: #fff;
+}
+
+.btn:hover {
+    
+    background-color: #707070;
+    color: rgb(255, 255, 255);
+    
+}
+.shadow-wrapper {
+    background: #fdfdfd;
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+    padding: 3%;
+    padding-bottom: 5%;
+    font-weight: 700;
+}
+
+nav {
+    .nav-item{
+        color: #fff;
+    }
+}
+
+p {
+    line-height: 0.5;
+}

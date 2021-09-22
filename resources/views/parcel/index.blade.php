@@ -6,10 +6,10 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <p>List of parcels</p>
+                        <h4>List of parcels</h4>
 
                         <details>
-                            <summary>Options</summary>
+                            <summary>Filter</summary>
                             {{-- FILTER --}}
                             <form action="{{ route('parcel.index') }}" method="get">
                                 <p class="d-inline">Filter</p>
@@ -18,14 +18,32 @@
                                         <option value="0" disabled selected>Select Post</option>
                                         @foreach ($posts as $post)
                                             <option value="{{ $post->id }}" @if ($post_id == $post->id) selected @endif>
-                                                {{ $post->code }} </option>
+                                                {{ $post->code }} ({{$post->town}})</option>
                                         @endforeach
                                     </select>
                                     <small class="form-text ">Select post from the list.</small>
                                 </div>
                                 <div class="mb-3">
+
                                     <button type=" submit" class="btn btn-dark btn-sm" name="filter"
                                         value="post">Filter</button>
+                                    <a href="{{ route('parcel.index') }}" class="btn btn-dark btn-sm">Reset</a>
+                                </div>
+                            </form>
+                        </details>
+
+                        <details>
+                            <summary>Search</summary>
+                            {{-- search --}}
+                            <form action="{{ route('parcel.index') }}" method="get">
+                                <p class="d-inline">Filter</p>
+                                <div class="form-group ">
+                                    <input class="form-control" type="text" placeholder="Search" name="s" value="{{$s}}">
+                                    <small class="form-text text-muted">Search</small>
+                                </div>
+                                <div class="mb-3">
+
+                                    <button type=" submit" class="btn btn-dark btn-sm"name="search" value="all">Search</button>
                                     <a href="{{ route('parcel.index') }}" class="btn btn-dark btn-sm">Reset</a>
                                 </div>
                             </form>
@@ -44,9 +62,11 @@
                                 <form method="POST" action="{{ route('parcel.destroy', [$parcel]) }}">
                                     <div class="btn-group d-flex">
                                         @csrf
-                                        <a href="{{ route('parcel.edit', [$parcel]) }}" class="btn btn-dark btn-sm m-1"><i
+                                        <a href="{{ route('parcel.edit', [$parcel]) }}" class="btn btn-dark btn-sm m-1" title="edit"><i
                                                 class="fas fa-user-edit"></i></a>
-                                        <button type="submit" class="btn btn-dark btn-sm m-1"><i
+                                        <a href="{{ route('parcel.show', [$parcel]) }}" class="btn btn-dark btn-sm m-1"
+                                            title="View"><i class="fas fa-binoculars"></i></a>
+                                        <button type="submit" class="btn btn-danger btn-sm m-1" title="delete"><i
                                                 class="fas fa-trash"></i></button>
                                     </div>
                                 </form>

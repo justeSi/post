@@ -4,26 +4,27 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card" >
+                <div class="card">
                     <div class="card-header">
-                        <p>List of posts</p>
+                        <h4>List of posts</h4>
                     </div>
-                    <div class="card-body shadow-wrapper " >
+                    <div class="card-body shadow-wrapper ">
                         @foreach ($posts as $post)
-
                             <div class="border-bottom d-flex justify-content-between p-2">
                                 <div>
-                                    <p> {{ $post->town }} {{ $post->capacity }} {{ $post->code }}</p>
-                                    <p>Turi siuntinių: {{ $post->getParcels->count() }}</p>
+                                    <p>Town: {{ $post->town }} </p>
+                                    <p>Capacity: {{ $post->capacity }} </p>  
+                                    <p>Code: {{ $post->code }}</p>
+                                    <p>Amount of parcels {{ $post->getParcels->count() }}</p>
                                 </div>
-
-
                                 <form method="POST" action="{{ route('post.destroy', [$post]) }}">
                                     <div class="btn-group d-flex">
                                         @csrf
                                         <a href="{{ route('post.edit', [$post]) }}" class="btn btn-dark btn-sm m-1"
                                             title="edit"><i class="fas fa-user-edit"></i></a>
-                                        <button type="submit" class="btn btn-dark btn-sm m-1" title="delete"><i
+                                            <a href="{{ route('post.show', [$post]) }}" class="btn btn-dark btn-sm m-1"
+                                            title="View"><i class="fas fa-binoculars"></i></a>
+                                        <button type="submit" class="btn btn-danger btn-sm m-1" title="delete"><i
                                                 class="fas fa-trash"></i></button>
                                     </div>
                                 </form>

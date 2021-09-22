@@ -6,9 +6,8 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <p>Update new post</p>
+                        <h4>Update new post</h4>
                     </div>
-
                     <div class="card-body shadow-wrapper">
                         <form method="POST" action="{{ route('post.update', $post) }}" enctype="multipart/form-data">
 
@@ -34,8 +33,8 @@
                             </div>
 
                             @csrf
-                            <button type="submit" class="btn btn-dark btn-sm">Add</button>
-                            <a href="{{ URL::previous() }}" class="btn btn-dark btn-sm">Back</a>
+                            <a href="{{ URL::previous() }}" class="btn btn-dark btn-md"><i class="fas fa-arrow-left mr-2"></i>Back</a>
+                            <button type="submit" class="btn btn-dark btn-md"><i class="fas fa-check mr-2"></i>Add</button>
                         </form>
                     </div>
                 </div>

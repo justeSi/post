@@ -28,21 +28,21 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123'),
         ]);
 
-        foreach (range(0, 40) as  $_ ) {
+        foreach (range(0, 10) as  $_ ) {
             
             DB::table('posts')->insert([
                 'town' => $faker->city(),
                 'capacity' => 20,
-                'code' =>'P-'.rand(11,99),
+                'code' =>'P-'.rand(1,99),
             ]);
         }
 
-        foreach (range(1, 500) as  $_ ) {
+        foreach (range(1, 50) as  $_ ) {
             DB::table('parcels')->insert([
                 'weight' => mt_rand(111, 15999)/100,
                 'phone' => '+37069'.rand(100000, 999999),
                 'info' => $faker->text(400),
-                'post_id' => rand(1, 41)
+                'post_id' => rand(1, 11)
             ]);
         }
 

@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
 
             $table->string('town', 55);
             $table->integer('capacity');
-            $table->string('code', 20);
+            $table->char('code', 20);
 
             $table->timestamps();
         });

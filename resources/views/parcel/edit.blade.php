@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <p>Add new parcel</p>
+                        <h4>Add new parcel</h4>
                     </div>
 
                     <div class="card-body shadow-wrapper">
@@ -37,17 +37,17 @@
                                 <label>Post:</label>
                                 <select class="form-control" name="post_id">
                                     @foreach ($posts as $post)
-                                        <option value="{{ $post->id }}" @if (old('post_id', $post->id) == $post->id)
+                                        <option value="{{ $post->id }}" @if (old('post_id', $parcel->post_id) == $post->id)
                                             selected
-                                    @endif>{{ $post->town }} code: {{ $post->code }}
+                                    @endif>{{ $post->town }} code: {{ $post->code }} free space: {{ $post->capacity - $post->getParcels->count() }}
                                     </option>
                                     @endforeach
                                 </select>
                                 <small class="form-text text-muted">Choose post</small>
                             </div>
                             @csrf
-                            <button type="submit" class="btn btn-dark btn-sm">Add</button>
-                            <a href="{{ URL::previous() }}" class="btn btn-dark btn-sm">Back</a>
+                            <a href="{{ URL::previous() }}" class="btn btn-dark btn-md"><i class="fas fa-arrow-left mr-2"></i>Back</a>
+                            <button type="submit" class="btn btn-dark btn-md"><i class="fas fa-check mr-2"></i>Add</button>
                         </form>
                     </div>
                 </div>

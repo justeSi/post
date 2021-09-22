@@ -6,6 +6,7 @@ use App\Models\Parcel;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Validator;
+use PDF;
 
 class ParcelController extends Controller
 {
@@ -26,7 +27,17 @@ class ParcelController extends Controller
         if ($request->filter && 'post' == $request->filter) {
             $parcels = Parcel::where('post_id', $request->post_id)->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         }
-        return view('parcel.index', ['parcels' => $parcels, 'posts' => $posts, 'post_id' => $request->post_id ?? '0']);
+        else if ($request->search && 'all' == $request->search){
+            $parcels = Parcel::where('weight', 'like', '%'.$request->s.'%')
+            ->orWhere('phone', 'like', '%'.$request->s.'%')
+            ->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        }
+        
+        return view('parcel.index', [
+            'parcels' => $parcels, 
+            'posts' => $posts, 
+            'post_id' => $request->post_id ?? '0',
+            's' => $request->s ?? '']);
     }
 
     /**
@@ -68,7 +79,7 @@ class ParcelController extends Controller
         $parcel->phone = $request->parcel_phone;
         $parcel->info = $request->parcel_info;
         $parcel->post_id = $request->post_id;
-
+        
         $posts = Post::all();
         foreach ($posts as $post) {
             if ($post->id == $request->post_id) {
@@ -93,7 +104,8 @@ class ParcelController extends Controller
      */
     public function show(Parcel $parcel)
     {
-        //
+        $post = Post::all();
+        return view('parcel.show', ['parcel' => $parcel, 'post' => $post]);
     }
 
     /**
@@ -159,5 +171,11 @@ class ParcelController extends Controller
     {
         $parcel->delete();
         return redirect()->route('parcel.index')->with('success_message', 'Successfully removed.');
+    }
+    public function pdf(Parcel $parcel)
+    {
+        $posts = Post::all();
+        $pdf = PDF::loadView('parcel.pdf', ['parcel' => $parcel, 'posts' => $posts]);
+        return $pdf->download(ucfirst($parcel->getPost->town).'.pdf');
     }
 }

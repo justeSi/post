@@ -41,7 +41,7 @@ Route::group(['prefix' => 'parcels'], function(){
     Route::post('update/{parcel}', [ParcelController::class, 'update'])->name('parcel.update');
     Route::post('delete/{parcel}', [ParcelController::class, 'destroy'])->name('parcel.destroy');
     Route::get('show/{parcel}', [ParcelController::class, 'show'])->name('parcel.show');
-    Route::get('pdf/{book}', [ParcelController::class, 'pdf'])->name('book.pdf');
+    Route::get('pdf/{parcel}', [ParcelController::class, 'pdf'])->name('parcel.pdf');
 });
 
 

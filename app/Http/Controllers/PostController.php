@@ -71,7 +71,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $parcels = Parcel::all();
+        return view('post.show', ['post' => $post, 'parcels' => $parcels]);
     }
 
     /**
@@ -120,8 +121,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->getPercels->count()){
-            return redirect()->back()->with('info_message', 'Not allowed, post has members');
+        if($post->getParcels->count()){
+            return redirect()->back()->with('info_message', 'Not allowed, post has parcels');
         }
         $post->delete();
         return redirect()->route('post.index')->with('success_message', 'Successfully removed.');

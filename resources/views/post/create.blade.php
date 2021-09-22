@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <p>Add new post</p>
+                        <h4>Add new post</h4>
                     </div>
 
                     <div class="card-body shadow-wrapper">
@@ -32,8 +32,8 @@
                             </div>
 
                             @csrf
-                            <button type="submit" class="btn btn-dark btn-sm">Add</button>
-                            <a href="{{ URL::previous() }}" class="btn btn-dark btn-sm">Back</a>
+                            <a href="{{ URL::previous() }}" class="btn btn-dark btn-md"><i class="fas fa-arrow-left mr-2"></i>Back</a>
+                            <button type="submit" class="btn btn-dark btn-md"><i class="fas fa-check mr-2"></i>Add</button>
                         </form>
                     </div>
                 </div>

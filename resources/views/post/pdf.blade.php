@@ -40,12 +40,13 @@
 <body>
     <h1>{{ $post->town }}</h1>
     <div class="size">Size: {{ $post->code }} km<sup>2</sup></div>
-    <div class="about">{!! $parcel->info !!}</div>
+    
     <h3>Parcels:</h3>
     @foreach ($parcels as $parcel)
         @if ($parcel->post_id == $post->id)
             <div class="master">
                 {{ $parcel->weight }} {{ $parcel->phone }}
+                <div class="about">{!! $parcel->info !!}</div>
             </div>
         @endif
 

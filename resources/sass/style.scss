@@ -52,3 +52,24 @@ nav {
 p {
     line-height: 0.5;
 }
+
+.navi{
+    ul > li > a::before,
+    a::before {
+        content: '';
+        display: block;
+        height: 0.2778rem;
+        position: absolute;
+        top: 0;
+        width: 0%;
+        background-color: #2f8dff;
+        -webkit-transition: all ease-in-out 250ms;
+        -o-transition: all ease-in-out 250ms;
+        transition: all ease-in-out 250ms;
+    }
+    
+    a:hover::before,
+    ul > li > a:hover::before {
+        width: 60%;
+    }
+}

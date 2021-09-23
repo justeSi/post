@@ -23,20 +23,26 @@ class ParcelController extends Controller
     public function index(Request $request)
     {
         $parcels = Parcel::orderBy('weight', 'DESC')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
-        $posts = Post::orderBy('code', 'ASC')->get();
-        if ($request->filter && 'post' == $request->filter) {
-            $parcels = Parcel::where('post_id', $request->post_id)->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        $posts = Post::orderBy('code')->get();
+        if ($request->filter && 'post' == $request->filter && 'desc' == $request->sort_dir) {
+            $parcels = Parcel::where('post_id', $request->post_id)->orderBy('weight', 'DESC')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        }
+        else if ($request->filter && 'post' == $request->filter && 'asc' == $request->sort_dir) {
+            $parcels = Parcel::where('post_id', $request->post_id)->orderBy('weight', 'ASC')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         }
         else if ($request->search && 'all' == $request->search){
             $parcels = Parcel::where('weight', 'like', '%'.$request->s.'%')
             ->orWhere('phone', 'like', '%'.$request->s.'%')
             ->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+            
+            
         }
         
         return view('parcel.index', [
             'parcels' => $parcels, 
             'posts' => $posts, 
             'post_id' => $request->post_id ?? '0',
+            'sortDirection' => $request->sort_dir ?? 'asc',
             's' => $request->s ?? '']);
     }
 

@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Parcel;  
 use Illuminate\Http\Request;
 use Validator;
+use PDF;
 
 class PostController extends Controller
 {
@@ -126,5 +127,11 @@ class PostController extends Controller
         }
         $post->delete();
         return redirect()->route('post.index')->with('success_message', 'Successfully removed.');
+    }
+    public function pdf(Post $post)
+    {
+        $parcels = Parcel::all();
+        $pdf = PDF::loadView('post.pdf', ['post' => $post, 'parcels' => $parcels]);
+        return $pdf->download(ucfirst($post->town).'.pdf');
     }
 }

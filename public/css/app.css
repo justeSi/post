@@ -10050,6 +10050,22 @@ p {
   line-height: 0.5;
 }
 
+.navi ul > li > a::before,
+.navi a::before {
+  content: "";
+  display: block;
+  height: 0.2778rem;
+  position: absolute;
+  top: 0;
+  width: 0%;
+  background-color: #2f8dff;
+  transition: all ease-in-out 250ms;
+}
+.navi a:hover::before,
+.navi ul > li > a:hover::before {
+  width: 60%;
+}
+
 /*!
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
